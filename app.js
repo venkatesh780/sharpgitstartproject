@@ -1,6 +1,10 @@
 const pageHeading = document.getElementById("header-title");
 const mainHeading = document.getElementsByClassName("title");
 const listItems = document.getElementsByClassName("list-group-item");
+const listItemsWithTagName = document.getElementsByTagName("li");
+
+listItemsWithTagName[4].setAttribute("class", "list-group-item");
+
 pageHeading.textContent = "Sharpner List";
 
 pageHeading.style.borderBottom = "1px solid black";
@@ -12,3 +16,5 @@ listItems[2].style.backgroundColor = "green";
 for (let i = 0; i < listItems.length; i++) {
   listItems[i].style.fontWeight = "bold";
 }
+
+console.log(listItemsWithTagName[4]);
