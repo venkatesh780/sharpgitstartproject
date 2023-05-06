@@ -1,26 +1,39 @@
-const pageHeading = document.getElementById("header-title");
-const mainHeading = document.getElementsByClassName("title");
-const listItems = document.getElementsByClassName("list-group-item");
-const listItemsWithTagName = document.getElementsByTagName("li");
-const getOddElements = document.querySelectorAll(".list-group-item");
+var form = document.getElementById("addForm");
+var itemList = document.getElementById("items");
+var filter = document.getElementById("filter");
 
-listItemsWithTagName[4].setAttribute("class", "list-group-item");
+form.addEventListener("submit", addItem);
+itemList.addEventListener("click", removeItem);
 
-pageHeading.textContent = "Sharpner List";
+function addItem(e) {
+  e.preventDefault();
 
-pageHeading.style.borderBottom = "1px solid black";
+  var newItem = document.getElementById("item").value;
 
-mainHeading[0].style.fontWeight = "bold";
-mainHeading[0].style.color = "green";
-// listItems[2].style.backgroundColor = "green";
-listItems[1].style.backgroundColor = "green";
+  var li = document.createElement("li");
 
-for (let i = 0; i < listItems.length; i++) {
-  listItems[i].style.fontWeight = "bold";
+  li.className = "list-group-item";
+
+  li.appendChild(document.createTextNode(newItem));
+
+  var deleteBtn = document.createElement("button");
+  const editBtn = document.createElement("button");
+
+  deleteBtn.className = "btn btn-danger btn-sm float-right delete";
+  editBtn.className = "btn btn-danger btn-sm float-right edit mr-2";
+
+  deleteBtn.appendChild(document.createTextNode("X"));
+  editBtn.appendChild(document.createTextNode("edit"));
+
+  li.appendChild(deleteBtn);
+  li.appendChild(editBtn);
+
+  itemList.appendChild(li);
 }
 
-listItems[2].style.display = "none";
-
-for (let i = 0; i <= getOddElements.length; i += 2) {
-  getOddElements[i].style.backgroundColor = "green";
+function removeItem(e) {
+  if (e.target.classList.contains("delete")) {
+    var li = e.target.parentElement;
+    itemList.removeChild(li);
+  }
 }
