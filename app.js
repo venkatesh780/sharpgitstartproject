@@ -6,6 +6,10 @@ form.addEventListener("submit", addItem);
 itemList.addEventListener("click", removeItem);
 filter.addEventListener("keyup", filterItems);
 
+const itemsDataMap = new Map();
+const itemsDataObj = {};
+let id = 1;
+
 function addItem(e) {
   e.preventDefault();
 
@@ -32,6 +36,20 @@ function addItem(e) {
   li.appendChild(editBtn);
 
   itemList.appendChild(li);
+  document.getElementById("item").value = "";
+  document.getElementById("description").value = "";
+
+  itemsDataMap.set(id, `${newItem} ${desciption}`);
+
+  for (let [key, value] of itemsDataMap) {
+    let keyStr = key + "";
+    itemsDataObj[keyStr] = value;
+  }
+
+  let itemsDataObjStr = JSON.stringify(itemsDataObj);
+  localStorage.setItem("items", itemsDataObjStr);
+
+  id += 1;
 }
 
 function removeItem(e) {
